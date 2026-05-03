@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Gmail Automation Test Suite" parallel="false" verbose="2">
+    <test name="Gmail Mail Deletion Tests">
+        <classes>
+            <class name="com.openway.tests.QAMailDeletionTest">
+                <methods>
+                    <include name="testLoginAndGetLastUnreadEmail"/>
+                    <include name="testDeleteSingleEmail"/>
+                    <include name="testVerifyDeletedEmailNotInInbox"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

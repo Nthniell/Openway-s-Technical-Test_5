@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="log.path">logs</Property>
+        <Property name="log.pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${log.pattern}"/>
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Console>
+
+        <!-- Rolling File Appender for all logs -->
+        <RollingFile name="RollingFile" fileName="${log.path}/gmail-automation.log"
+                     filePattern="${log.path}/gmail-automation-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${log.pattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <!-- File Appender for error logs -->
+        <File name="ErrorFile" fileName="${log.path}/gmail-automation-error.log">
+            <PatternLayout pattern="${log.pattern}"/>
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <!-- Root Logger -->
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="ErrorFile"/>
+        </Root>
+
+        <!-- Selenium Logger -->
+        <Logger name="org.seleniumhq" level="WARN"/>
+        <Logger name="org.openqa" level="WARN"/>
+
+        <!-- Application Loggers -->
+        <Logger name="com.openway" level="INFO"/>
+    </Loggers>
+</Configuration>

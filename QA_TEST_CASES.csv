@@ -1,0 +1,180 @@
+Test Case ID,Feature,Test Scenario,Pre-conditions,Test Steps,Test Data,Expected Result,Actual Result,Status,Priority,Notes/Defect Link
+DEL-001,Mail Deletion,Delete a single email from the Inbox,"1. User is logged in to Gmail
+2. Inbox contains at least one email","1. Open Gmail and navigate to Inbox
+2. Hover over any email row
+3. Click the checkbox that appears to select the email
+4. Click the Trash icon in the toolbar",Any existing email in the Inbox,"1. The selected email disappears from Inbox immediately
+2. Snackbar appears: '1 conversation moved to Trash'
+3. Email is visible in Trash folder
+4. Inbox unread count decreases by 1",(To be filled during execution),UNCHECKED,Critical,Verify Trash is accessible via left sidebar
+DEL-002,Mail Deletion,Verify deleted email is removed from Inbox view,"1. User is logged in to Gmail
+2. Email has been deleted
+3. Inbox is being viewed","1. Delete an email using DEL-001 steps
+2. View Inbox
+3. Verify email subject is not in the list
+4. Search for deleted email by subject in Inbox",Email that was just deleted,"1. Deleted email is not visible in any Inbox list view
+2. Email subject does not appear in email list
+3. Total email count decreased by 1
+4. Deleted email only appears in Trash folder",(To be filled during execution),UNCHECKED,High,Verify search functionality excludes deleted emails from Inbox
+DEL-003,Mail Deletion,Delete multiple emails sequentially,"1. User is logged in to Gmail
+2. Inbox contains at least 5 emails
+3. All emails are marked as read","1. Select first email
+2. Click Trash button
+3. Wait for page load
+4. Repeat steps 1-3 for two more emails","First 3 emails in Inbox (any emails)","1. Each email deleted successfully
+2. After 3 deletions, Inbox count reduced by 3
+3. All 3 deleted emails appear in Trash
+4. No errors or timeouts occur",(To be filled during execution),UNCHECKED,High,Monitor for race conditions or async issues
+DEL-004,Mail Deletion,Verify undo functionality after deletion,"1. User is logged in to Gmail
+2. Inbox contains at least one email
+3. Email is about to be deleted","1. Delete an email using DEL-001 steps
+2. Immediately look for Undo notification
+3. Click Undo button
+4. Verify email is restored to Inbox",Any email in Inbox,"1. Undo notification/button appears within 1 second of deletion
+2. Clicking Undo restores email to Inbox
+3. Email count returns to original value
+4. Restored email maintains original read/unread status",(To be filled during execution),UNCHECKED,High,Verify undo window is 30 seconds (Gmail default)
+DEL-005,Mail Deletion,Verify Trash folder visibility after deletion,"1. User is logged in to Gmail
+2. Inbox contains at least one email
+3. Trash folder may or may not have content","1. Delete one email from Inbox
+2. Click Trash folder in left sidebar
+3. Verify deleted email appears in Trash
+4. Note email timestamp and properties",Any email from Inbox,"1. Trash folder is accessible from left sidebar
+2. Deleted email appears in Trash with correct subject
+3. Email properties (sender, date) are preserved
+4. Trash folder shows accurate count",(To be filled during execution),UNCHECKED,High,Check if Trash auto-empty is enabled
+DEL-006,Mail Deletion,Bulk delete using select all,"1. User is logged in to Gmail
+2. Inbox contains at least 3 emails
+3. User has appropriate permissions","1. Use Select All feature
+2. Select all emails in Inbox
+3. Click Trash/Delete button
+4. Confirm deletion","All emails currently in Inbox (any number)","1. All selected emails move to Trash
+2. Inbox becomes empty
+3. Snackbar confirms action: 'N conversations moved to Trash'
+4. Trash shows all deleted emails",(To be filled during execution),UNCHECKED,Medium,Verify select-all functionality limits
+DEL-007,Mail Deletion,Delete email with attachment,"1. User is logged in to Gmail
+2. Inbox contains email with attachment
+3. Email is unread","1. Click email with attachment
+2. Verify attachment is visible
+3. Click delete button
+4. Return to Inbox","Email with PDF or image attachment","1. Email deleted successfully
+2. Attachment metadata is preserved in Trash
+3. Attachment is not separately accessible
+4. Email appears in Trash with attachment indicator",(To be filled during execution),UNCHECKED,Medium,Test with different file types (PDF/Image/Doc)
+DEL-008,Mail Deletion,Delete email from conversation thread,"1. User is logged in to Gmail
+2. Email conversation with 3+ messages exists
+3. User wants to delete one message","1. Open email conversation
+2. Click delete on one message in thread
+3. Verify other messages remain
+4. Check thread count","One email from a 3+ message thread","1. Single message deleted from thread
+2. Other thread messages remain visible
+3. Thread subject remains visible
+4. Thread message count decreases by 1",(To be filled during execution),UNCHECKED,Medium,Gmail typically deletes entire conversation; verify behavior
+DEL-009,Mail Deletion,Delete email with labels/tags,"1. User is logged in to Gmail
+2. Email has custom label applied
+3. User views Inbox","1. Select email with label
+2. Click delete button
+3. Go to label folder
+4. Verify email is removed","Email with label (e.g., 'Work', 'Personal')","1. Email deleted from Inbox
+2. Email no longer visible in label folder
+3. Label remains available for other emails
+4. Deleted email appears in Trash",(To be filled during execution),UNCHECKED,Medium,Verify label deletion vs email deletion
+DEL-010,Mail Deletion,Verify deleted email is not recoverable after 30 days,"1. User is logged in to Gmail
+2. Email was deleted 30+ days ago
+3. Email is in Trash folder","1. Navigate to Trash
+2. Look for email deleted 30+ days ago
+3. Try to restore it
+4. Check Trash empty button","Email older than 30 days in Trash","1. Email is no longer in Trash
+2. Email permanently deleted from system
+3. Error message if trying to restore
+4. Cannot be recovered",(To be filled during execution),UNCHECKED,Low,This is automatic; test with backdated emails
+DEL-011,Mail Deletion,Delete email from spam folder,"1. User is logged in to Gmail
+2. Spam folder contains at least one email
+3. User navigates to Spam","1. Open Spam folder
+2. Select email
+3. Click delete button
+4. Verify Trash count increases","Any email in Spam folder","1. Email moved to Trash (not permanently deleted)
+2. Spam folder email count decreases
+3. Trash folder email count increases
+4. Undo is available",(To be filled during execution),UNCHECKED,Medium,Spam deletion behavior might differ
+DEL-012,Mail Deletion,Delete draft email,"1. User is logged in to Gmail
+2. Draft email exists
+3. User views Drafts folder","1. Navigate to Drafts
+2. Select draft email
+3. Click delete button
+4. Verify Trash","Draft email with unsent content","1. Draft deleted from Drafts folder
+2. Draft appears in Trash
+3. Drafts folder count decreases
+4. Content preserved in Trash",(To be filled during execution),UNCHECKED,Medium,Confirm draft doesn't trigger send
+DEL-013,Mail Deletion,Delete starred/important email,"1. User is logged in to Gmail
+2. Email is starred/marked important
+3. Email is in Inbox","1. Select starred email
+2. Delete it
+3. Check Trash
+4. Verify starred folder","Email with star icon","1. Email deleted from Inbox
+2. Star removed from email
+3. Email no longer in Starred view
+4. Email appears in Trash without star",(To be filled during execution),UNCHECKED,Medium,Verify star status doesn't prevent deletion
+DEL-014,Mail Deletion,Delete and immediately search,"1. User is logged in to Gmail
+2. Email with unique subject exists
+3. Email is about to be deleted","1. Delete email with unique subject
+2. Use search to find by subject
+3. Search in Inbox
+4. Search in All Mail","Email with unique subject like 'UNIQUE-TEST-XYZ'","1. Email not found in Inbox search
+2. Email found in All Mail search
+3. Email found in Trash search
+4. Search results accurate",(To be filled during execution),UNCHECKED,Medium,Verify search indexing after deletion
+DEL-015,Mail Deletion,Delete with keyboard shortcut,"1. User is logged in to Gmail
+2. Email is selected in Inbox
+3. Keyboard is accessible","1. Select email
+2. Press Delete or Backspace key
+3. Verify email deleted
+4. Check Trash","Any email in Inbox","1. Email deleted via keyboard shortcut
+2. Same behavior as button delete
+3. Undo available
+4. Email in Trash",(To be filled during execution),UNCHECKED,Low,Check which keys work (D key in Gmail)
+DEL-016,Mail Deletion,Verify email details before deletion,"1. User is logged in to Gmail
+2. Email exists in Inbox
+3. User reviews email details","1. Click email to open
+2. Note sender, date, subject
+3. Click back to Inbox
+4. Delete email","Any email from Inbox","1. Email details clearly visible before deletion
+2. User can make informed delete decision
+3. Email deleted with correct metadata
+4. Metadata preserved in Trash",(To be filled during execution),UNCHECKED,Low,Ensure no data loss
+DEL-017,Mail Deletion,Delete email while offline (if supported),"1. User is logged in to Gmail
+2. Browser goes offline
+3. Email in Inbox ready to delete","1. Disable internet/go offline
+2. Try to delete email
+3. Go back online
+4. Verify sync","Any email; offline mode enabled if supported","1. System handles offline gracefully
+2. Deletion syncs when online
+3. No duplicate or lost emails
+4. Email in Trash after sync",(To be filled during execution),UNCHECKED,Low,Test offline functionality if available
+DEL-018,Mail Deletion,Delete very large email (>50MB),"1. User is logged in to Gmail
+2. Large email (>50MB if possible)
+3. Email in Inbox","1. Select large email
+2. Click delete
+3. Monitor performance
+4. Verify deletion","Large email or message bundle","1. Large email deleted without lag
+2. No timeout or error
+3. Appears in Trash
+4. System remains responsive",(To be filled during execution),UNCHECKED,Low,Gmail may have size limits
+DEL-019,Mail Deletion,Delete email across multiple sessions,"1. User logged in on Device A
+2. Same user logged in on Device B
+3. Email exists in shared Inbox","1. Delete email on Device A
+2. Check Device B Inbox
+3. Refresh on Device B
+4. Verify deletion","Any email; multiple browsers or devices","1. Deletion visible on Device A immediately
+2. Deletion syncs to Device B
+3. Trash updated on both devices
+4. No conflicts or duplicates",(To be filled during execution),UNCHECKED,Low,Test cross-device sync
+DEL-020,Mail Deletion,Delete email with special characters,"1. User is logged in to Gmail
+2. Email with special chars in subject
+3. Email in Inbox","1. Locate email with subject like 'Test: ñ, é, 中文'
+2. Delete it
+3. Verify in Trash
+4. Verify search finds it","Email with non-ASCII or special characters","1. Email deleted successfully
+2. Special characters preserved in Trash
+3. Email searchable by subject
+4. No encoding issues",(To be filled during execution),UNCHECKED,Low,Verify character encoding handling
