@@ -38,34 +38,20 @@ public class ConfigManager {
      * @return Property value or null if not found
      */
     public static String getProperty(String key) {
+        String systemProperty = System.getProperty(key);
+        if (systemProperty != null && !systemProperty.isBlank()) {
+            return systemProperty;
+        }
+
+        String environmentProperty = System.getenv(toEnvironmentKey(key));
+        if (environmentProperty != null && !environmentProperty.isBlank()) {
+            return environmentProperty;
+        }
+
         return properties.getProperty(key);
     }
 
-    /**
-     * Get property value with default
-     * @param key Property key
-     * @param defaultValue Default value if key not found
-     * @return Property value or default value
-     */
-    public static String getProperty(String key, String defaultValue) {
-        return properties.getProperty(key, defaultValue);
-    }
-
-    /**
-     * Get boolean property
-     * @param key Property key
-     * @return Boolean value
-     */
-    public static boolean getBoolean(String key) {
-        return Boolean.parseBoolean(properties.getProperty(key, "false"));
-    }
-
-    /**
-     * Get integer property
-     * @param key Property key
-     * @return Integer value
-     */
-    public static int getInteger(String key) {
-        return Integer.parseInt(properties.getProperty(key, "0"));
+    private static String toEnvironmentKey(String key) {
+        return key.toUpperCase().replace('.', '_').replace('-', '_');
     }
 }

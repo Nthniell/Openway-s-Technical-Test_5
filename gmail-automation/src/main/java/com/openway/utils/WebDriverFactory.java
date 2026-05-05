@@ -34,27 +34,6 @@ public class WebDriverFactory {
     }
 
     /**
-     * Create a Chrome WebDriver in headless mode
-     * @return WebDriver instance
-     */
-    public static WebDriver createHeadlessChromeDriver() {
-        logger.info("Creating headless Chrome WebDriver instance");
-        WebDriverManager.chromedriver().setup();
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--disable-blink-features=AutomationControlled");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-        options.setExperimentalOption("useAutomationExtension", false);
-
-        WebDriver driver = new ChromeDriver(options);
-        logger.info("Headless Chrome WebDriver created successfully");
-        return driver;
-    }
-
-    /**
      * Quit the WebDriver instance
      * @param driver WebDriver instance to quit
      */

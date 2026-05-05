@@ -178,3 +178,22 @@ DEL-020,Mail Deletion,Delete email with special characters,"1. User is logged in
 2. Special characters preserved in Trash
 3. Email searchable by subject
 4. No encoding issues",(To be filled during execution),UNCHECKED,Low,Verify character encoding handling
+GM-001,Mail Deletion Automation,Log the title of the last unread email after Gmail login,"1. Dedicated Google test account exists
+2. Test account Inbox contains at least five unread emails
+3. Credentials are supplied through config.properties, Maven system properties, or environment variables
+4. If Google asks for OTP/additional verification, current verification code is supplied for the run","1. Open Google Chrome in a new window
+2. Navigate to https://mail.google.com/mail/
+3. Enter login email and click Next
+4. Enter password and click Next
+5. If additional verification appears, enter configured verification code and continue
+6. Wait until Inbox is loaded
+7. Count unread emails
+8. Read the title/subject of the last unread email shown in the mailbox
+9. Write the title to gmail-automation/logs/gmail-automation.log","test.email / TEST_EMAIL
+test.password / TEST_PASSWORD
+test.verification.code / TEST_VERIFICATION_CODE when required
+Mailbox with 5+ unread emails","1. Chrome starts a fresh browser session
+2. Gmail login completes successfully
+3. Inbox loads and at least five unread emails are detected
+4. Last unread email title is captured without opening or modifying the email
+5. Log contains entry in the format 'GM-001 LAST_UNREAD_EMAIL_TITLE=<subject>'",(To be filled during execution),UNCHECKED,Critical,Automated in QAMailDeletionTest.testGM001LogLastUnreadEmailTitle

@@ -5,9 +5,11 @@
         <classes>
             <class name="com.openway.tests.QAMailDeletionTest">
                 <methods>
-                    <include name="testLoginAndGetLastUnreadEmail"/>
-                    <include name="testDeleteSingleEmail"/>
-                    <include name="testVerifyDeletedEmailNotInInbox"/>
+                    <include name="testDEL001DeleteSingleEmailFromInbox"/>
+                    <include name="testDEL002VerifyDeletedEmailRemovedFromInbox"/>
+                    <include name="testDEL003DeleteMultipleEmailsSequentially"/>
+                    <include name="testDEL004UndoAfterDeletion"/>
+                    <include name="testDEL005VerifyTrashFolderVisibilityAfterDeletion"/>
                 </methods>
             </class>
         </classes>
